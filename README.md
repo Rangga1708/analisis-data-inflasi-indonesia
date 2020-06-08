@@ -51,6 +51,6 @@ fig = go.Figure(data = plot_inflasi, layout = layout)
 #tampilkan plot
 fig.show()
 ```
-![Plot Awal Data Inflasi Indonesia](https://github.com/Rangga1708/analisis-data-inflasi-indonesia/blob/master/Plot_Awal_Data_Inflasi_Indonesia.png)
+<img src="Plot_Awal_Data_Inflasi_Indonesia.png" class="img-responsive" alt="">
 
 Dari plot di atas, ternyata data tidak stasioner terhadap mean karena plot tersebut membentuk bukit dan jurang yang cukup terjal. Kita coba lakukan ***differencing*** data (menghitung selisih data pada waktu ke-t dengan ke-t+1) dan melihat plotnya. 
