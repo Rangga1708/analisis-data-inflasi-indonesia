@@ -66,20 +66,20 @@ Karena p-value > 0.05, maka hipotesis nol tidak ditolak sehingga dapat disimpulk
 Jika data tidak stasioner terhadap mean, maka analisis runtun waktu tidak dapat dilakukan. Untuk mengatasi masalah tersebut, kita perlu mentransformasi data terlebih dahulu. Kita akan coba lakukan ***differencing*** data (menghitung selisih data pada waktu ke-t dengan ke-t+1) dan melihat plotnya. 
 ```Python
 #tentukan sumbu x dan y line plot
-waktu = data_inflasi_train['Month']
-inflasi = data_inflasi_train['Inflasi']
+waktu = data_diff['t']
+inflasi_diff = data_diff['Difference']
 
-#buat line plot
+#buat line plot data differencing
 plot_inflasi = go.Scatter(
     x = waktu,
-    y = inflasi,
+    y = inflasi_diff,
     mode = 'lines'
 )
 
 #atur layout
 layout = {
     'title' : {
-        'text' : 'Plot Awal Data Inflasi Indonesia',
+        'text' : 'Plot Differencing Data Inflasi Indonesia',
         'x' : 0.5
     }
 }
@@ -101,3 +101,15 @@ print('P-value :',result[1])
 `P-value : 6.303998805804485e-09`
 
 Karena p-value < 0.05, maka hipotesis nol ditolak sehingga dapat disimpulkan bahwa data stasioner terhadap mean. Dengan demikian, analisis runtun waktu dapat dilakukan. Akan tetapi, perlu diingat bahwa data yang akan kita gunakan adalah data differencing.
+
+## Menentukan Orde ARIMA
+Sebenarnya ada banyak model runtun waktu yang dapat kita gunakan. Tapi pada kali ini, kita akan menggunakan model ARIMA. Secara umum, model ARIMA(p,d,q) adalah sebagai berikut.
+
+![ARIMA(p,d,q)](https://latex.codecogs.com/gif.latex?%5Calpha_0Y_t&plus;%5Calpha_1Y_%7Bt-1%7D&plus;%5Cdots&plus;%5Calpha_pY_%7Bt-p%7D%3D%5Cbeta_0%5Cvarepsilon_t&plus;%5Cbeta_1%5Cvarepsilon_%7Bt-1%7D&plus;%5Cdots&plus;%5Cbeta_q%5Cvarepsilon_%7Bt-q%7D)
+
+dengan <br>
+![Y_t](https://latex.codecogs.com/gif.latex?Y_t) : data ke-t <br>
+![p](https://latex.codecogs.com/gif.latex?p) : orde AR <br>
+![q](https://latex.codecogs.com/gif.latex?q) : orde MA <br>
+![epsilon](https://latex.codecogs.com/gif.latex?%5Cvarepsilon_t%20%5Csim%20White%20Noise%280%2C%5Csigma%5E2%29)
+
