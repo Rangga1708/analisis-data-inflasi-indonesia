@@ -103,7 +103,7 @@ print('P-value :',result[1])
 Karena p-value < 0.05, maka hipotesis nol ditolak sehingga dapat disimpulkan bahwa data stasioner terhadap mean. Dengan demikian, analisis runtun waktu dapat dilakukan. Akan tetapi, perlu diingat bahwa data yang akan kita gunakan adalah data differencing.
 
 ## Menentukan Orde ARIMA
-Sebenarnya ada banyak model runtun waktu yang dapat kita gunakan. Tapi pada kali ini, kita akan menggunakan model ARIMA. Secara umum, model ARIMA(![p,d,q](https://latex.codecogs.com/gif.latex?p%2Cd%2Cq)) adalah sebagai berikut.
+Salah satu model runtun waktu yang akan kita gunakan kali ini adalah model ARIMA karena model ini cukup sederhana. Untuk penjelasan terkait model ARIMA dapat teman-teman pelajari sendiri. Secara umum, model ARIMA(![p,d,q](https://latex.codecogs.com/gif.latex?p%2Cd%2Cq)) adalah sebagai berikut.
 
 ![ARIMA(p,d,q)](https://latex.codecogs.com/gif.latex?%5Calpha_0Y_t&plus;%5Calpha_1Y_%7Bt-1%7D&plus;%5Cdots&plus;%5Calpha_pY_%7Bt-p%7D%3D%5Cbeta_0%5Cvarepsilon_t&plus;%5Cbeta_1%5Cvarepsilon_%7Bt-1%7D&plus;%5Cdots&plus;%5Cbeta_q%5Cvarepsilon_%7Bt-q%7D)
 
@@ -112,6 +112,14 @@ dengan <br>
 ![p](https://latex.codecogs.com/gif.latex?p) : orde AR <br>
 ![q](https://latex.codecogs.com/gif.latex?q) : orde MA <br>
 ![epsilon](https://latex.codecogs.com/gif.latex?%5Cvarepsilon_t%20%5Csim%20White%20Noise%280%2C%5Csigma%5E2%29)
+
+Karena kita sudah melakukan differencing pada data, maka model ARIMA yang akan terbentuk menjadi
+
+![ARIMA(p,d,q) diff](https://latex.codecogs.com/gif.latex?%5Calpha_0%20%5CDelta%20Y_t%20&plus;%20%5Calpha_1%20%5CDelta%20Y_%7Bt-1%7D%20&plus;%20%5Cdots%20&plus;%20%5Calpha_p%20%5CDelta%20Y_%7Bt-p%7D%20%3D%20%5Cbeta_0%20%5CDelta%20%5Cvarepsilon_t%20&plus;%20%5Cbeta_1%20%5CDelta%20%5Cvarepsilon_%7Bt-1%7D%20&plus;%20%5Cdots%20&plus;%20%5Cbeta_q%20%5CDelta%20%5Cvarepsilon_%7Bt-q%7D)
+
+dengan <br>
+![delta Y_t](https://latex.codecogs.com/gif.latex?%5CDelta%20Y_t%20%3D%20Y_t-Y_%7Bt-1%7D) <br>
+![delta epsilon t](https://latex.codecogs.com/gif.latex?%5CDelta%20%5Cvarepsilon_t%20%3D%20%5Cvarepsilon_t-%5Cvarepsilon_%7Bt-1%7D)
 
 Nilai ![d](https://latex.codecogs.com/gif.latex?d) pada model ARIMA di atas menandakan orde differencing (berapa kali kita melakukan differencing data). Karena kita hanya melakukan 1x differencing, maka ![d=1](https://latex.codecogs.com/gif.latex?d%3D1). Nilai yang perlu kita cari berikutnya adalah orde AR (![p](https://latex.codecogs.com/gif.latex?p)), orde MA (![q](https://latex.codecogs.com/gif.latex?q)), koefisien ![alpha](https://latex.codecogs.com/gif.latex?%5Calpha), dan koefisien ![beta](https://latex.codecogs.com/gif.latex?%5Cbeta).
 
@@ -127,3 +135,8 @@ plot_pacf(inflasi_diff, lags=36, ax=plt.gca())
 plt.show()
 ```
 ![plot acf dan pacf](https://github.com/Rangga1708/analisis-data-inflasi-indonesia/blob/master/Plot_ACF_PACF.png)
+
+Untuk menentukan orde AR dan MA, kita perlu melihat lag mana yang melewati arsiran persegi. Lag yang melewati arsiran persegi dan terletak paling kanan akan menjadi penentu dari orde AR dan MA. Akan tetapi, orde AR dan MA yang cukup besar sebenarnya tidak terlalu signifikan dengan orde yang lebih kecil sehingga kita cukup perhatikan empat lag paling kiri dari plot ACF dan PACF. 
+
+Dari empat lag pertama masing-masing plot, dapat dilihat bahwa lag pertama dan kedua dari masing-masing plot melewati arsiran persegi. Dengan demikian, kita peroleh orde AR ![p=2](https://latex.codecogs.com/gif.latex?p%3D2) dan orde MA ![q=2](https://latex.codecogs.com/gif.latex?q%3D2). Jujur saja alasan mengapa pemilihannya seperti itu aku juga tidak terlalu mengerti hehehe.... Mungkin jika teman-teman tahu alasannya bisa share ke aku.
+
