@@ -136,7 +136,7 @@ plt.show()
 ```
 ![plot acf dan pacf](https://github.com/Rangga1708/analisis-data-inflasi-indonesia/blob/master/Plot_ACF_PACF.png)
 
-Untuk menentukan orde AR dan MA, kita perlu melihat lag mana yang melewati arsiran persegi. Lag yang melewati arsiran persegi dan terletak paling kanan akan menjadi penentu dari orde AR dan MA. Akan tetapi, orde AR dan MA yang cukup besar sebenarnya tidak terlalu signifikan dengan orde yang lebih kecil sehingga kita cukup perhatikan empat lag paling kiri dari plot ACF dan PACF. 
+Untuk menentukan orde AR dan MA, kita perlu melihat lag mana yang melewati arsiran persegi. Lag yang melewati arsiran persegi dan terletak paling kanan akan menjadi penentu dari orde AR dan MA. Akan tetapi, orde AR dan MA yang cukup besar sebenarnya tidak terlalu signifikan dengan orde yang lebih kecil sehingga kita cukup perhatikan empat lag paling kiri dari plot ACF dan PACF. Apalagi kalau kita lihat plot di atas, lag pertama jauh melewati arsiran persegi. Artinya orde AR dan MA yang kecil sudah cukup untuk membentuk model ARIMA.
 
 Dari empat lag pertama masing-masing plot, dapat dilihat bahwa lag pertama dan kedua dari masing-masing plot melewati arsiran persegi. Dengan demikian, kita peroleh orde AR ![p=2](https://latex.codecogs.com/gif.latex?p%3D2) dan orde MA ![q=2](https://latex.codecogs.com/gif.latex?q%3D2). Jujur saja alasan mengapa pemilihannya seperti itu aku juga tidak terlalu mengerti hehehe.... Mungkin jika teman-teman tahu alasannya bisa share ke aku.
 
