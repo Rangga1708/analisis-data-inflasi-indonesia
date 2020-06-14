@@ -103,7 +103,7 @@ print('P-value :',result[1])
 Karena p-value < 0.05, maka hipotesis nol ditolak sehingga dapat disimpulkan bahwa data stasioner terhadap mean. Dengan demikian, analisis runtun waktu dapat dilakukan. Akan tetapi, perlu diingat bahwa data yang akan kita gunakan adalah data differencing.
 
 ## Menentukan Orde ARIMA
-Sebenarnya ada banyak model runtun waktu yang dapat kita gunakan. Tapi pada kali ini, kita akan menggunakan model ARIMA. Secara umum, model ARIMA(p,d,q) adalah sebagai berikut.
+Sebenarnya ada banyak model runtun waktu yang dapat kita gunakan. Tapi pada kali ini, kita akan menggunakan model ARIMA. Secara umum, model ARIMA(![p,d,q](https://latex.codecogs.com/gif.latex?p%2Cd%2Cq)) adalah sebagai berikut.
 
 ![ARIMA(p,d,q)](https://latex.codecogs.com/gif.latex?%5Calpha_0Y_t&plus;%5Calpha_1Y_%7Bt-1%7D&plus;%5Cdots&plus;%5Calpha_pY_%7Bt-p%7D%3D%5Cbeta_0%5Cvarepsilon_t&plus;%5Cbeta_1%5Cvarepsilon_%7Bt-1%7D&plus;%5Cdots&plus;%5Cbeta_q%5Cvarepsilon_%7Bt-q%7D)
 
@@ -113,3 +113,17 @@ dengan <br>
 ![q](https://latex.codecogs.com/gif.latex?q) : orde MA <br>
 ![epsilon](https://latex.codecogs.com/gif.latex?%5Cvarepsilon_t%20%5Csim%20White%20Noise%280%2C%5Csigma%5E2%29)
 
+Nilai ![d](https://latex.codecogs.com/gif.latex?d) pada model ARIMA di atas menandakan orde differencing (berapa kali kita melakukan differencing data). Karena kita hanya melakukan 1x differencing, maka ![d=1](https://latex.codecogs.com/gif.latex?d%3D1). Nilai yang perlu kita cari berikutnya adalah orde AR (![p](https://latex.codecogs.com/gif.latex?p)), orde MA (![q](https://latex.codecogs.com/gif.latex?q)), koefisien ![alpha](https://latex.codecogs.com/gif.latex?%5Calpha), dan koefisien ![beta](https://latex.codecogs.com/gif.latex?%5Cbeta).
+
+### Plot ACF dan PACF
+Pertama, untuk menentukan orde AR dan MA, kita perlu memperhatikan plot Autocorrelation Function (ACF) dan plot Partial Autocorrelation (PACF) terlebih dahulu.
+```Python
+#buat plot acf dan pacf
+plt.figure(figsize=(15,4))
+plt.subplot(121)
+plot_acf(inflasi_diff, lags=36, ax=plt.gca())
+plt.subplot(122)
+plot_pacf(inflasi_diff, lags=36, ax=plt.gca())
+plt.show()
+```
+![plot acf dan pacf](https://github.com/Rangga1708/analisis-data-inflasi-indonesia/blob/master/Plot_ACF_PACF.png)
