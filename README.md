@@ -262,7 +262,7 @@ data_inflasi_test['Error'] = data_inflasi_test['Inflasi']-predicted_values[1:]
 
 data_inflasi_test
 ```
-
+<br>
 <table>
     <tr>
         <th> Month </th>
@@ -304,7 +304,7 @@ data_inflasi_test['Error'] = data_inflasi_test['Inflasi']-predicted_values[1:]
 
 data_inflasi_test
 ```
-
+<br>
 <table>
     <tr>
         <th> Month </th>
@@ -346,7 +346,7 @@ data_inflasi_test['Error'] = data_inflasi_test['Inflasi']-predicted_values[1:]
 
 data_inflasi_test
 ```
-
+<br>
 <table>
     <tr>
         <th> Month </th>
@@ -388,7 +388,7 @@ data_inflasi_test['Error'] = data_inflasi_test['Inflasi']-predicted_values[1:]
 
 data_inflasi_test
 ```
-
+<br>
 <table>
     <tr>
         <th> Month </th>
@@ -430,7 +430,7 @@ data_inflasi_test['Error'] = data_inflasi_test['Inflasi']-predicted_values[1:]
 
 data_inflasi_test
 ```
-
+<br>
 <table>
     <tr>
         <th> Month </th>
