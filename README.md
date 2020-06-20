@@ -220,13 +220,11 @@ data_inflasi_test = data_inflasi_test.iloc[::-1].reset_index(drop = True)
 
 data_inflasi_test
 ```
+
 <table>
     <tr>
         <th> Month </th>
         <th> Inflasi </th>
-    </tr>
-    <tr>
-        <td> 2019-07-01 </td> <td> 0.0332 </td>
     </tr>
     <tr>
         <td> 2019-07-01 </td> <td> 0.0332 </td>
@@ -246,3 +244,94 @@ data_inflasi_test
     <tr>
         <td> 2019-12-01 </td> <td> 0.0272 </td>
     </tr>    
+</table>
+
+Sekarang kita akan menggunakan kelima model ARIMA yang sudah terbentuk untuk memprediksi inflasi indonesia dari bulan Juli 2019 sampai Desember 2019, lalu membandingkan nilainya dengan data asli.
+
+1. ARIMA(0,1,2) TC
+```Python
+predicted_values_diff = model_nocons_sig[0].predict(start = len(inflasi_diff), end = len(inflasi_diff)+5)
+
+predicted_values = [inflasi[197]]
+n_data_awal = len(inflasi)
+for i in range(len(predicted_values_diff)):
+    predicted_values.append(predicted_values[i]+predicted_values_diff[n_data_awal-1+i])
+    
+data_inflasi_test['Forecast'] = predicted_values[1:]
+data_inflasi_test['Error'] = data_inflasi_test['Inflasi']-predicted_values[1:]
+
+data_inflasi_test
+```
+
+<table>
+    <tr>
+        <th> Month </th>
+        <th> Inflasi </th>
+        <th> Forecast </th>
+        <th> Error </th>
+    </tr>
+    <tr>
+        <td> 2019-07-01 </td> <td> 0.0332 </td> <td> 0.032653 </td> <td> 0.000547 </td>
+    </tr>
+    <tr>
+        <td> 2019-08-01 </td> <td> 0.0349 </td> <td> 0.032915 </td> <td> 0.001985 </td>
+    </tr>
+    <tr>
+        <td> 2019-09-01 </td> <td> 0.0339 </td> <td> 0.032915 </td> <td> 0.000985 </td>
+    </tr>
+    <tr>
+        <td> 2019-10-01 </td> <td> 0.0313 </td> <td> 0.032915 </td> <td> -0.001615 </td>
+    </tr>
+    <tr>
+        <td> 2019-11-01 </td> <td> 0.0300 </td> <td> 0.032915 </td> <td> -0.002915 </td>
+    </tr>
+    <tr>
+        <td> 2019-12-01 </td> <td> 0.0272 </td> <td> 0.032915 </td> <td> -0.005715 </td>
+    </tr>  
+</table>
+
+2. ARIMA(1,1,1) TC
+```Python
+predicted_values_diff = model_nocons_sig[1].predict(start = len(inflasi_diff), end = len(inflasi_diff)+5)
+
+predicted_values = [inflasi[197]]
+n_data_awal = len(inflasi)
+for i in range(len(predicted_values_diff)):
+    predicted_values.append(predicted_values[i]+predicted_values_diff[n_data_awal-1+i])
+    
+data_inflasi_test['Forecast'] = predicted_values[1:]
+data_inflasi_test['Error'] = data_inflasi_test['Inflasi']-predicted_values[1:]
+
+data_inflasi_test
+```
+
+<table>
+    <tr>
+        <th> Month </th>
+        <th> Inflasi </th>
+        <th> Forecast </th>
+        <th> Error </th>
+    </tr>
+    <tr>
+        <td> 2019-07-01 </td> <td> 0.0332 </td> <td> 0.032896 </td> <td> 0.000304 </td>
+    </tr>
+    <tr>
+        <td> 2019-08-01 </td> <td> 0.0349 </td> <td> 0.032919 </td> <td> 0.001985 </td>
+    </tr>
+    <tr>
+        <td> 2019-09-01 </td> <td> 0.0339 </td> <td> 0.032920 </td> <td> 0.000981 </td>
+    </tr>
+    <tr>
+        <td> 2019-10-01 </td> <td> 0.0313 </td> <td> 0.032920 </td> <td> -0.001620 </td>
+    </tr>
+    <tr>
+        <td> 2019-11-01 </td> <td> 0.0300 </td> <td> 0.032920 </td> <td> -0.002920 </td>
+    </tr>
+    <tr>
+        <td> 2019-12-01 </td> <td> 0.0272 </td> <td> 0.032920 </td> <td> -0.005720 </td>
+    </tr>  
+</table>
+
+3. ARIMA(0,1,1) TC
+4. ARIMA(2,1,0) TC
+5. ARIMA(1,1,0) TC
