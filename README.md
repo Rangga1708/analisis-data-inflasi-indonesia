@@ -167,3 +167,82 @@ Untuk outputnya tidak aku cantumkan di sini karena cukup panjang, tapi teman-tem
 
 ## Model Selection
 Dari beberapa model ARIMA yang sudah terbentuk, kita akan pilih model ARIMA yang semua variabelnya signifikan. Dengan melihat p-value masing-masing variabel setiap modelnya pada hasil output pembentukan model ARIMA, variabel yang signifikan adalah variabel dengan p-value kurang dari 0.05. Berikut program untuk menentukan mana model yang semua variabelnya signifikan.
+```Python
+#cek apakah ada variabel yang tidak signifikan
+def cek(model):
+    not_sig_pvalues = [x for x in model.pvalues if x > 0.05]
+    if len(not_sig_pvalues) != 0:
+        return False
+    else:
+        return True
+
+#model yang signifikan
+model_cons_sig = []
+model_nocons_sig = []
+model_cons_sig_name = []
+model_nocons_sig_name = []
+
+#print model yang signifikan
+for i in range(len(model_cons)):
+    if cek(model_cons[i]) == True:
+        model_cons_sig.append(model_cons[i])
+        ar = len(model_cons[i].arparams)
+        ma = len(model_cons[i].maparams)
+        model_cons_sig_name.append('ARIMA(%d,1,%d) C' %(ar,ma))
+        print('ARIMA(%d,1,%d) C' %(ar,ma))
+    if cek(model_nocons[i]) == True:
+        model_nocons_sig.append(model_nocons[i])
+        ar = len(model_nocons[i].arparams)
+        ma = len(model_nocons[i].maparams)
+        model_nocons_sig_name.append('ARIMA(%d,1,%d) TC' %(ar,ma))
+        print('ARIMA(%d,1,%d) TC' %(ar,ma))
+```
+Kita peroleh model yang signifikan adalah
+```
+ARIMA(0,1,2) TC
+ARIMA(1,1,1) TC
+ARIMA(0,1,1) TC
+ARIMA(2,1,0) TC
+ARIMA(1,1,0) TC
+```
+dengan TC : tanpa konstan.
+
+## Model Testing
+Dari kelima model yang signifikan, kita akan memilih model mana yang akan kita gunakan. Biasanya, dalam memilih model terbaik kita perlu membandingkan nilai statistik dari masing-masing model (R Squared, Sum Square Error, dsb). Setelah itu, kita juga perlu melakukan diagnostic checking untuk memastikan apakah model yang kita pilih benar-benar model yang terbaik. Akan tetapi, kali ini kita tidak melakukan itu karena selama ini ketika aku membuat model time series, model yang terbaik secara statistik tidak sesuai dengan keadaan yang sebenarnya. Apa maksudnya? Nanti akan aku tunjukkan di bawah.
+
+Oleh karena itu, untuk memilih model yang terbaik, kita langsung menguji model kita menggunakan data test. Berikut data inflasi Indonesia dari bulan Juli 2019 sampai Desember 2019 yang akan kita gunakan untuk menguji model.
+```Python
+#import data
+data_inflasi_test = pd.read_excel('data_inflasi_indonesia_test.xlsx')
+
+#ubah urutan data
+data_inflasi_test = data_inflasi_test.iloc[::-1].reset_index(drop = True)
+
+data_inflasi_test
+```
+<table>
+    <tr>
+        <th> Month </th>
+        <th> Inflasi </th>
+    </tr>
+    <tr>
+        <td> 2019-07-01 </td> <td> 0.0332 </td>
+    </tr>
+    <tr>
+        <td> 2019-07-01 </td> <td> 0.0332 </td>
+    </tr>
+    <tr>
+        <td> 2019-08-01 </td> <td> 0.0349 </td>
+    </tr>
+    <tr>
+        <td> 2019-09-01 </td> <td> 0.0339 </td>
+    </tr>
+    <tr>
+        <td> 2019-10-01 </td> <td> 0.0313 </td>
+    </tr>
+    <tr>
+        <td> 2019-11-01 </td> <td> 0.0300 </td>
+    </tr>
+    <tr>
+        <td> 2019-12-01 </td> <td> 0.0272 </td>
+    </tr>    
