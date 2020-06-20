@@ -333,5 +333,127 @@ data_inflasi_test
 </table>
 
 3. ARIMA(0,1,1) TC
+```Python
+predicted_values_diff = model_nocons_sig[2].predict(start = len(inflasi_diff), end = len(inflasi_diff)+5)
+
+predicted_values = [inflasi[197]]
+n_data_awal = len(inflasi)
+for i in range(len(predicted_values_diff)):
+    predicted_values.append(predicted_values[i]+predicted_values_diff[n_data_awal-1+i])
+    
+data_inflasi_test['Forecast'] = predicted_values[1:]
+data_inflasi_test['Error'] = data_inflasi_test['Inflasi']-predicted_values[1:]
+
+data_inflasi_test
+```
+
+<table>
+    <tr>
+        <th> Month </th>
+        <th> Inflasi </th>
+        <th> Forecast </th>
+        <th> Error </th>
+    </tr>
+    <tr>
+        <td> 2019-07-01 </td> <td> 0.0332 </td> <td> 0.032927 </td> <td> 0.000273 </td>
+    </tr>
+    <tr>
+        <td> 2019-08-01 </td> <td> 0.0349 </td> <td> 0.032927 </td> <td> 0.001973 </td>
+    </tr>
+    <tr>
+        <td> 2019-09-01 </td> <td> 0.0339 </td> <td> 0.032927 </td> <td> 0.000973 </td>
+    </tr>
+    <tr>
+        <td> 2019-10-01 </td> <td> 0.0313 </td> <td> 0.032927 </td> <td> -0.001627 </td>
+    </tr>
+    <tr>
+        <td> 2019-11-01 </td> <td> 0.0300 </td> <td> 0.032927 </td> <td> -0.002927 </td>
+    </tr>
+    <tr>
+        <td> 2019-12-01 </td> <td> 0.0272 </td> <td> 0.032927 </td> <td> -0.005727 </td>
+    </tr>  
+</table>
+
 4. ARIMA(2,1,0) TC
+```Python
+predicted_values_diff = model_nocons_sig[3].predict(start = len(inflasi_diff), end = len(inflasi_diff)+5)
+
+predicted_values = [inflasi[197]]
+n_data_awal = len(inflasi)
+for i in range(len(predicted_values_diff)):
+    predicted_values.append(predicted_values[i]+predicted_values_diff[n_data_awal-1+i])
+    
+data_inflasi_test['Forecast'] = predicted_values[1:]
+data_inflasi_test['Error'] = data_inflasi_test['Inflasi']-predicted_values[1:]
+
+data_inflasi_test
+```
+
+<table>
+    <tr>
+        <th> Month </th>
+        <th> Inflasi </th>
+        <th> Forecast </th>
+        <th> Error </th>
+    </tr>
+    <tr>
+        <td> 2019-07-01 </td> <td> 0.0332 </td> <td> 0.034814 </td> <td> -0.001614 </td>
+    </tr>
+    <tr>
+        <td> 2019-08-01 </td> <td> 0.0349 </td> <td> 0.035875 </td> <td> -0.000975 </td>
+    </tr>
+    <tr>
+        <td> 2019-09-01 </td> <td> 0.0339 </td> <td> 0.034593 </td> <td> -0.000693 </td>
+    </tr>
+    <tr>
+        <td> 2019-10-01 </td> <td> 0.0313 </td> <td> 0.034804 </td> <td> -0.003504 </td>
+    </tr>
+    <tr>
+        <td> 2019-11-01 </td> <td> 0.0300 </td> <td> 0.035193 </td> <td> -0.005193 </td>
+    </tr>
+    <tr>
+        <td> 2019-12-01 </td> <td> 0.0272 </td> <td> 0.034925 </td> <td> -0.007725 </td>
+    </tr>  
+</table>
+
 5. ARIMA(1,1,0) TC
+```Python
+predicted_values_diff = model_nocons_sig[4].predict(start = len(inflasi_diff), end = len(inflasi_diff)+5)
+
+predicted_values = [inflasi[197]]
+n_data_awal = len(inflasi)
+for i in range(len(predicted_values_diff)):
+    predicted_values.append(predicted_values[i]+predicted_values_diff[n_data_awal-1+i])
+    
+data_inflasi_test['Forecast'] = predicted_values[1:]
+data_inflasi_test['Error'] = data_inflasi_test['Inflasi']-predicted_values[1:]
+
+data_inflasi_test
+```
+
+<table>
+    <tr>
+        <th> Month </th>
+        <th> Inflasi </th>
+        <th> Forecast </th>
+        <th> Error </th>
+    </tr>
+    <tr>
+        <td> 2019-07-01 </td> <td> 0.0332 </td> <td> 0.034637 </td> <td> -0.001437 </td>
+    </tr>
+    <tr>
+        <td> 2019-08-01 </td> <td> 0.0349 </td> <td> 0.034000 </td> <td> 0.000900 </td>
+    </tr>
+    <tr>
+        <td> 2019-09-01 </td> <td> 0.0339 </td> <td> 0.034221 </td> <td> -0.000321 </td>
+    </tr>
+    <tr>
+        <td> 2019-10-01 </td> <td> 0.0313 </td> <td> 0.034144 </td> <td> -0.002844 </td>
+    </tr>
+    <tr>
+        <td> 2019-11-01 </td> <td> 0.0300 </td> <td> 0.034171 </td> <td> -0.004171 </td>
+    </tr>
+    <tr>
+        <td> 2019-12-01 </td> <td> 0.0272 </td> <td> 0.034162 </td> <td> -0.006962 </td>
+    </tr>  
+</table>
