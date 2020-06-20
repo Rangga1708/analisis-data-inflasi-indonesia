@@ -141,4 +141,29 @@ Untuk menentukan orde AR dan MA, kita perlu melihat lag mana yang melewati arsir
 Dari empat lag pertama masing-masing plot, dapat dilihat bahwa lag pertama dan kedua dari masing-masing plot melewati arsiran persegi. Dengan demikian, kita peroleh orde AR ![p=2](https://latex.codecogs.com/gif.latex?p%3D2) dan orde MA ![q=2](https://latex.codecogs.com/gif.latex?q%3D2). Jujur saja alasan mengapa pemilihannya seperti itu aku juga tidak terlalu mengerti hehehe.... Mungkin jika teman-teman tahu alasannya bisa share ke aku.
 
 ## Membentuk Model ARIMA
-Walaupun kita sudah menentukan orde AR dan orde MA, bukan berarti model yang kita peroleh adalah ARIMA(2,1,2). Seperti yang sudah saya katakan sebelumnya, orde AR dan MA yang cukup besar tidak terlalu signifikan dengan orde yang lebih kecil. Dengan kata lain, orde yang kecil saja sudah cukup untuk membentuk model ARIMA. Tapi seberapa kecil kah? Kita akan menyelidiki model ARIMA dengan orde AR dan MA yang lebih kecil atau sama dengan 2 baik dengan konstanta maupun tanpa konstanta (seperti ARIMA(2,1,2), ARIMA(1,1,2), ARIMA(0,1,2), ARIMA(2,1,1), dst). Perlu diingat bahwa tidak ada ARIMA(0,1,0) karena jelas dari persamaannya saja tidak mungkin kedua orde bernilai 0. Berikut code python yang kita gunakan untuk menyelidiki beberapa model ARIMA yang dapat terbentuk.
+Walaupun kita sudah menentukan orde AR dan orde MA, bukan berarti model yang kita peroleh adalah ARIMA(2,1,2). Seperti yang sudah aku katakan sebelumnya, orde AR dan MA yang cukup besar tidak terlalu signifikan dengan orde yang lebih kecil. Dengan kata lain, orde yang kecil saja sudah cukup untuk membentuk model ARIMA. Tapi seberapa kecil kah? 
+
+Kita akan menyelidiki model ARIMA dengan orde AR dan MA yang lebih kecil atau sama dengan 2 baik dengan konstanta maupun tanpa konstanta (seperti ARIMA(2,1,2), ARIMA(1,1,2), ARIMA(0,1,2), ARIMA(2,1,1), dst). Perlu diingat bahwa tidak ada ARIMA(0,1,0) karena jelas dari persamaannya saja tidak mungkin kedua orde bernilai 0. Berikut code python yang kita gunakan untuk menyelidiki beberapa model ARIMA yang dapat terbentuk.
+```Python
+#buat model arima
+model_cons = []
+model_nocons = []
+
+k = 0
+for i in range(2,-1,-1):
+    for j in range(2,-1,-1):
+        if i==0 and j==0:
+            continue
+        else:
+            model1 = ARIMA(inflasi_diff,order=(j,1,i))
+            model2 = ARIMA(inflasi_diff,order=(j,1,i))
+            model_cons.append(model1.fit())
+            model_nocons.append(model2.fit(trend='nc'))
+            print(model_cons[k].summary(),'\n')
+            print(model_nocons[k].summary(),'\n')
+            k = k+1
+```
+Untuk outputnya tidak aku cantumkan di sini karena cukup panjang, tapi teman-teman dapat melihatnya di syntax yang sudah aku buat.
+
+## Model Selection
+Dari beberapa model ARIMA yang sudah terbentuk, kita akan pilih model ARIMA yang semua variabelnya signifikan. Dengan melihat p-value masing-masing variabel setiap modelnya pada hasil output pembentukan model ARIMA, variabel yang signifikan adalah variabel dengan p-value kurang dari 0.05. Berikut program untuk menentukan mana model yang semua variabelnya signifikan.
