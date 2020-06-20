@@ -249,8 +249,8 @@ data_inflasi_test
 Sekarang kita akan menggunakan kelima model ARIMA yang sudah terbentuk untuk memprediksi inflasi indonesia dari bulan Juli 2019 sampai Desember 2019, lalu membandingkan nilainya dengan data asli.
 
 1. ARIMA(0,1,2) TC 
-<br>
-```
+
+```Python
 predicted_values_diff = model_nocons_sig[0].predict(start = len(inflasi_diff), end = len(inflasi_diff)+5)
 
 predicted_values = [inflasi[197]]
@@ -292,8 +292,8 @@ data_inflasi_test
 </table>
 
 2. ARIMA(1,1,1) TC
-<br>
-```
+
+```Python
 predicted_values_diff = model_nocons_sig[1].predict(start = len(inflasi_diff), end = len(inflasi_diff)+5)
 
 predicted_values = [inflasi[197]]
@@ -335,8 +335,8 @@ data_inflasi_test
 </table>
 
 3. ARIMA(0,1,1) TC
-<br>
-```
+
+```Python
 predicted_values_diff = model_nocons_sig[2].predict(start = len(inflasi_diff), end = len(inflasi_diff)+5)
 
 predicted_values = [inflasi[197]]
@@ -378,8 +378,8 @@ data_inflasi_test
 </table>
 
 4. ARIMA(2,1,0) TC
-<br>
-```
+
+```Python
 predicted_values_diff = model_nocons_sig[3].predict(start = len(inflasi_diff), end = len(inflasi_diff)+5)
 
 predicted_values = [inflasi[197]]
@@ -421,8 +421,8 @@ data_inflasi_test
 </table>
 
 5. ARIMA(1,1,0) TC
-<br>
-```
+
+```Python
 predicted_values_diff = model_nocons_sig[4].predict(start = len(inflasi_diff), end = len(inflasi_diff)+5)
 
 predicted_values = [inflasi[197]]
