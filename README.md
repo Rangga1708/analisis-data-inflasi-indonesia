@@ -457,3 +457,7 @@ data_inflasi_test
         <td> 2019-12-01 </td> <td> 0.0272 </td> <td> 0.034162 </td> <td> -0.006962 </td>
     </tr>  
 </table>
+
+Dari tabel-tabel di atas, kita bisa lihat beberapa hal. Model ARIMA(0,1,2), ARIMA(1,1,1), dan ARIMA(0,1,1) memberikan hasil prediksi yang cenderung konstan. Nilainya tiap periode tidak berubah. Tentunya dalam kenyataannya, inflasi Indonesia setiap bulan tidak akan selalu konstan. Sedangkan untuk model ARIMA(2,1,0) dan ARIMA(1,1,0) hasil prediksinya cenderung bervariatif. Kalau kita perhatikan errornya, error dari hasil prediksi model ARIMA(1,1,0) lebih kecil dibandingkan model ARIMA (2,1,0). Dengan demikian, kita pilih model ARIMA (1,1,0) atau sama dengan AR(1) (karena orde MA nya 0) sebagai model terbaik. Kita peroleh model time series
+
+![ARIMA(1,1,0)](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign*%7D%20%5CDelta%20Y_t%20-%200.3466%20%5CDelta%20Y_%7Bt-1%7D%20%3D%20%5CDelta%20%5Cvarepsilon_t%20%26%5Ciff%20Y_t%20-%20Y_%7Bt-1%7D%20-%200.3466%20%28Y_%7Bt-1%7D-Y_%7Bt-2%7D%29%20%3D%20%5Cvarepsilon_t%20-%20%5Cvarepsilon_%7Bt-1%7D%5C%5C%20%26%5Ciff%20Y_t%20-%201.3466%20Y_%7Bt-1%7D%20&plus;%200.3466%20Y_%7Bt-1%7D%20%3D%20%5Cvarepsilon_t%20-%20%5Cvarepsilon_%7Bt-1%7D%5C%5C%20%26%5Ciff%20Y_t%20%3D%201.3466%20Y_%7Bt-1%7D%20-%200.3466%20Y_%7Bt-1%7D%20&plus;%20%5Cvarepsilon_t%20-%20%5Cvarepsilon_%7Bt-1%7D%5C%5C%20%5Cend%7Balign*%7D)
