@@ -220,7 +220,7 @@ data_inflasi_test = data_inflasi_test.iloc[::-1].reset_index(drop = True)
 
 data_inflasi_test
 ```
-
+<br>
 <table>
     <tr>
         <th> Month </th>
